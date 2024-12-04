@@ -4,7 +4,7 @@
 ### **Comportament 1: Execució alterna**
 Els fils s'executen alternant-se de manera aparentment equitativa.
 
-- **Comportament**:  
+- **Resultat**:  
   ```  
   Termina thread main  
   Juan 1  
@@ -54,7 +54,7 @@ Aquest comportament s'obté deixant que la **MVJ (Màquina Virtual de Java)** ge
 ### **Comportament 2: Priorització de fils**
 El fil **Pepe** s'executa majoritàriament abans que el fil **Juan**.
 
-- **Comportament**:  
+- **Resultat**:  
   ```  
   Termina thread main  
   Pepe 1  
@@ -107,7 +107,7 @@ El fil **Pepe** s'executa majoritàriament abans que el fil **Juan**.
 ### **Comportament 3: Alternança estricta**
 Els fils s'executen en ordre altern estricte.
 
-- **Comportament**:  
+- **Resultat**:  
   ```  
   Termina thread main  
   Juan 1  
