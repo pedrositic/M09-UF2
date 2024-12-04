@@ -5,18 +5,29 @@
 Els fils s'executen alternant-se de manera aparentment equitativa.
 
 - **Resultat**:  
-  ```  
-  Termina thread main  
-  Juan 1  
-  Pepe 1  
-  Juan 2  
-  Pepe 2  
-  Juan 3  
-  Pepe 3  
-  ...  
-  Termina el fil Juan  
-  Termina el fil Pepe  
-  ```  
+    ```  
+    Termina thread main
+    Pepe 1
+    Pepe 2
+    Pepe 3
+    Juan 1
+    Juan 2
+    Pepe 4
+    Juan 3
+    Pepe 5
+    Juan 4
+    Juan 5
+    Juan 6
+    Juan 7
+    Juan 8
+    Juan 9
+    Pepe 6
+    Pepe 7
+    Pepe 8
+    Pepe 9
+    Termina el fil Juan
+    Termina el fil Pepe
+    ```  
 
 
 - **Descripció tècnica**:  
@@ -55,19 +66,29 @@ Aquest comportament s'obté deixant que la **MVJ (Màquina Virtual de Java)** ge
 El fil **Pepe** s'executa majoritàriament abans que el fil **Juan**.
 
 - **Resultat**:  
-  ```  
-  Termina thread main  
-  Pepe 1  
-  Pepe 2  
-  Pepe 3  
-  ...  
-  Juan 1  
-  Juan 2  
-  Juan 3  
-  ...  
-  Termina el fil Pepe  
-  Termina el fil Juan  
-  ```  
+    ```  
+    Termina thread main
+    Pepe 1
+    Pepe 2
+    Pepe 3
+    Pepe 4
+    Pepe 5
+    Pepe 6
+    Pepe 7
+    Pepe 8
+    Pepe 9
+    Juan 1
+    Juan 2
+    Juan 3
+    Juan 4
+    Juan 5
+    Juan 6
+    Juan 7
+    Juan 8
+    Juan 9
+    Termina el fil Juan
+    Termina el fil Pepe
+    ```  
 
 - **Descripció tècnica**:  
   Per aconseguir aquest comportament, s'ha utilitzat el mètode `setPriority()` assignant una prioritat alta a **Pepe** i baixa a **Juan**.
@@ -108,18 +129,29 @@ El fil **Pepe** s'executa majoritàriament abans que el fil **Juan**.
 Els fils s'executen en ordre altern estricte.
 
 - **Resultat**:  
-  ```  
-  Termina thread main  
-  Juan 1  
-  Pepe 1  
-  Juan 2  
-  Pepe 2  
-  Juan 3  
-  Pepe 3  
-  ...  
-  Termina el fil Juan  
-  Termina el fil Pepe  
-  ```  
+    ```
+    Termina thread main
+    Juan 1
+    Pepe 1
+    Pepe 2
+    Juan 2
+    Pepe 3
+    Juan 3
+    Pepe 4
+    Juan 4
+    Pepe 5
+    Juan 5
+    Pepe 6
+    Juan 6
+    Pepe 7
+    Juan 7
+    Pepe 8
+    Juan 8
+    Juan 9
+    Pepe 9
+    Termina el fil Pepe
+    Termina el fil Juan
+    ```  
 
 - **Descripció tècnica**:  
   Per aconseguir aquest comportament, s’ha utilitzat el mètode `Thread.sleep()` per forçar pauses curtes entre les iteracions de cada fil, garantint que l’ordre d'execució sigui estrictament alternat.
