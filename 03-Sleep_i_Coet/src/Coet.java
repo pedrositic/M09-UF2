@@ -1,4 +1,5 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class Coet {
   public static Motor[] motors = new Motor[4];
@@ -9,22 +10,33 @@ public class Coet {
       motors[i] = new Motor(i);
     }
 
-    Scanner sc = new Scanner(System.in);
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     while (true) {
-      int p = Integer.parseInt(sc.nextLine())
+      try {
+        int p = Integer.parseInt(reader.readLine());
+        passaAPotencia(p);
+        System.out.printf("Passant a potencia: %d\n", p);
+        arranca();
+        
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
     }
     
   }
 
-  public void passaAPotencia(int p) {
+  public static void passaAPotencia(int p) {
     for (Motor motor : motors) {
       motor.setPotencia(p);
     }
   }
 
-  public void arranca() {
+  public static void arranca() {
     for (Motor motor : motors) {
-      motor.start();
+      try {
+        motor.start();
+      } catch (Exception e) {
+      }
     }
   }
 }

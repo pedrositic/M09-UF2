@@ -54,7 +54,7 @@ public class Motor extends Thread {
         System.out.println("El fil ha estat interromput.");
       }
       if (powerCurr == 0)
-        break;
+        return;
     }
 
   }
