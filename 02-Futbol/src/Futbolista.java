@@ -38,7 +38,7 @@ public class Futbolista extends Thread {
         }
     }
 
-    public static void main(String[] args) throws InterruptedException{
+    public static void main(String[] args) throws InterruptedException {
         String[] list = {
                 "Lionel Messi",
                 "Cristiano Ronaldo",
