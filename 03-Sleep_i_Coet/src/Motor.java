@@ -3,11 +3,13 @@ import java.util.Random;
 public class Motor extends Thread {
   private int powerObj;
   private int powerCurr;
+  private int id;
 
-  public Motor() {
+  public Motor(int id) {
     super();
     powerCurr = 0;
     powerObj = 0;
+    this.id = id;
   }
 
   public int getPowerObj() {
@@ -22,6 +24,10 @@ public class Motor extends Thread {
     this.powerObj = powerObj;
   }
 
+  public void setId(int id) {
+    this.id = id;
+  }
+
   @Override
   public void run() {
     while (true) {
@@ -33,6 +39,10 @@ public class Motor extends Thread {
           Thread.sleep(interval);
           // Sumar o restar depenent els valors
           powerCurr = powerObj > powerCurr ? powerCurr + 1 : powerCurr - 1;
+
+          String status = (powerCurr == powerObj) ? "FerRes" : (powerObj > powerCurr ? "Incre." : "Decre.");
+          System.out.printf("Motor %d: %s Objectiu: %d Actual: %d%n", id, status, powerObj, powerCurr);
+
         } catch (InterruptedException e) {
           System.out.println("El fil ha estat interromput.");
         }
