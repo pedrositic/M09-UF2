@@ -17,7 +17,7 @@ public class Coet {
         passaAPotencia(p);
         System.out.printf("Passant a potencia: %d\n", p);
         arranca();
-        
+        if (p == 0) return;
       } catch (Exception e) {
         e.printStackTrace();
       }
