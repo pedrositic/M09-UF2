@@ -34,8 +34,9 @@ public class Coet {
   public static void arranca() {
     for (Motor motor : motors) {
       try {
-        motor.start();
+        if (!motor.isAlive()) motor.start();
       } catch (Exception e) {
+        e.printStackTrace();
       }
     }
   }
