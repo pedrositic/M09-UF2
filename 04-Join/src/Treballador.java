@@ -50,7 +50,7 @@ public class Treballador extends Thread {
           cobra();
           sleep(10);
           pagaImpostos();
-          sleep(100);
+          sleep(10);
           //System.out.printf("%d - %.2f\n", edat_actual, cobrat);
         } catch (InterruptedException e) {
           e.printStackTrace();
