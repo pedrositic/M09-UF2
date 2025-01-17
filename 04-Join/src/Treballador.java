@@ -11,14 +11,14 @@ public class Treballador extends Thread {
   private int edat_inici_treball;
   private int edat_fi_treball;
   private int edat_actual;
-  private double cobrat;
+  private float cobrat;
   private Random rnd;
 
   public int getEdat() {
     return edat_actual;
   }
 
-  public double getCobrat() {
+  public float getCobrat() {
     return cobrat;
   }
 
@@ -29,16 +29,16 @@ public class Treballador extends Thread {
     this.edat_inici_treball = edat_inici_treball;
     this.edat_fi_treball = edat_fi_treball;
     this.edat_actual = 0;
-    this.cobrat = 0.0;
+    this.cobrat = 0.0f;
   }
 
   private void cobra() {
-    cobrat = cobrat + (sou_anual_brut/12);
+    cobrat = cobrat + (sou_anual_brut/12.0f);
   }
 
   private void pagaImpostos() {
-    double paga = sou_anual_brut/12;
-    cobrat = cobrat - (paga*0.24);
+    float paga = sou_anual_brut/12.0f;
+    cobrat = cobrat - (paga*0.24f);
   }
 
   @Override
