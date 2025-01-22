@@ -24,10 +24,16 @@ public class Soci extends Thread {
       for (int j = 0; j < 12; j++) {
         if (j % 2 == 0) {
           // ingres
-          compte.setSaldo(compte.getSaldo() + aportacio);
+          // Es sincronitza l'objecte compte, només una instancia de compte podra entrar
+          synchronized(compte) {
+            compte.setSaldo(compte.getSaldo() + aportacio);
+          }
+
         } else {
           // retirada
-          compte.setSaldo(compte.getSaldo() - aportacio);
+          synchronized(compte) {
+            compte.setSaldo(compte.getSaldo() - aportacio);
+          }
         }
         int interval = rd.nextInt(esperaMax);
         try {

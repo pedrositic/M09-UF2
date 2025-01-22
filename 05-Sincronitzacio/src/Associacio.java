@@ -1,7 +1,9 @@
+import java.util.Random;
 
 public class Associacio {
   private int numSocis;
   private Soci[] socis;
+  private Random random = new Random();
 
   public Associacio() {
     numSocis = 1000;
@@ -31,9 +33,11 @@ public class Associacio {
   }
 
   public void mostraBalancComptes() {
-    Soci soci = socis[183];
+    int indexAleatori = random.nextInt(numSocis);
+    Soci soci = socis[indexAleatori];
+    System.out.println("Soci número: " + indexAleatori);
     System.out.println("Saldo: " + soci.getCompte().getSaldo());
-  }
+}
 
   public static void main(String[] args) {
     Associacio asso = new Associacio();
