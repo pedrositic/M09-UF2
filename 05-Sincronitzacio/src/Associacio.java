@@ -36,7 +36,7 @@ public class Associacio {
     int indexAleatori = random.nextInt(numSocis);
     Soci soci = socis[indexAleatori];
     System.out.println("Soci número: " + indexAleatori);
-    System.out.println("Saldo: " + soci.getCompte().getSaldo());
+    System.out.printf("Saldo: %.2f\n", soci.getCompte().getSaldo());
 }
 
   public static void main(String[] args) {
