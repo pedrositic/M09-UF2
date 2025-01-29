@@ -8,6 +8,7 @@ public class Esdeveniment {
 
   public Esdeveniment(int placesMaximes) {
     this.placesMaximes = placesMaximes;
+    placesDisponibles = placesMaximes;
     this.assistents = new ArrayList<>();
   }
 
@@ -35,23 +36,39 @@ public class Esdeveniment {
     this.placesDisponibles = placesDisponibles;
   }
 
-  public void ferReserva(Assistent assistent) {
+  // Els metodes son synchronized per garantir que nomes un thread pot modificar
+  // l'estat
+
+  public synchronized void ferReserva(Assistent assistent) {
+    // Mentre que no ho hagin places disponibles
+    while (placesDisponibles == 0) {
+      try {
+        wait();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+
     // Si encara no estan totes les places ocupades l'afegim
     if (assistents.size() < placesMaximes) {
       assistents.add(assistent);
       placesDisponibles--;
-      System.out.printf("%s ha fet una reserva. Places disponibles: %d", assistent.getName(), placesDisponibles);
+      System.out.printf("%s ha fet una reserva. Places disponibles: %d\n", assistent.getName(), placesDisponibles);
+      // Notifiquem de canvis
+      notifyAll();
     }
   }
 
-  public void cancelaReserva(Assistent assistent) {
+  public synchronized void cancelaReserva(Assistent assistent) {
     if (assistents.contains(assistent)) {
       assistents.remove(assistent);
       placesDisponibles++;
-      System.out.printf("%s ha cancel·lat una reserva. Places disponibles: %d", assistent.getName(), placesDisponibles);
-    }
-    else {
-      System.out.printf("%s no ha pogut cancel·lar una reserva inexistent. Places disponibles: %d", assistent.getName(), placesDisponibles);
+      System.out.printf("%s ha cancel·lat una reserva. Places disponibles: %d\n", assistent.getName(), placesDisponibles);
+      // Es notifica conforme s'ha alliberat una plaça
+      notifyAll();
+    } else {
+      System.out.printf("%s no ha pogut cancel·lar una reserva inexistent. Places disponibles: %d\n", assistent.getName(),
+          placesDisponibles);
     }
   }
 }

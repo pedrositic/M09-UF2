@@ -14,16 +14,19 @@ public class Assistent extends Thread {
 
   @Override
   public void run() {
-    try {
-      int prob = rd.nextInt(1);
-      if(prob == 0) esde.ferReserva(this);
-      else esde.cancelaReserva(this);
+    while (true) {
+      try {
+        int prob = rd.nextInt(2);
+        if(prob == 0) esde.ferReserva(this);
+        else esde.cancelaReserva(this);
+  
+        int temps = rd.nextInt(1000);
+        sleep(temps);
+        
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
 
-      int temps = rd.nextInt(1000);
-      sleep(temps);
-      
-    } catch (Exception e) {
-      e.printStackTrace();
     }
   }
 }
