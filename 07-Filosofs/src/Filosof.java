@@ -62,7 +62,7 @@ public class Filosof extends Thread {
 
   public void pensar() {
     Random rnd = new Random();
-    int temps = rnd.nextInt(2000) + 1000;
+    int temps = rnd.nextInt(1000) + 1000;
     try {
       sleep(temps);
     } catch (InterruptedException e) {
