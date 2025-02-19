@@ -27,7 +27,7 @@ public class Filosof extends Thread {
           gana = 0;
 
           Random rnd = new Random();
-            int temps = 1000 + rnd.nextInt(1000);
+          int temps = 1000 + rnd.nextInt(1000);
           try {
             sleep(temps);
           } catch (InterruptedException e) {

@@ -9,18 +9,19 @@ public class Taula {
         this.comensals = new ArrayList<>();
         this.forquilles = new ArrayList<>();
         for (int i = 0; i < comensals; i++) {
-            this.comensals.add(new Filosof("Filosof " + i));
+            this.comensals.add(new Filosof(i));
             this.forquilles.add(new Forquilla(i));
         }
         for (int i = 0; i < comensals; i++) {
-            this.comensals.get(i).forquillaEsquerra = this.forquilles.get(i);
-            this.comensals.get(i).forquillaDreta = this.forquilles.get((i + 1) % comensals);
+            this.comensals.get(i).setForquillaEsquerra(this.forquilles.get(i));
+            this.comensals.get(i).setForquillaDreta(this.forquilles.get((i + 1) % comensals));
         }
     }
 
     public void showTaula() {
         for (int i = 0; i < comensals.size(); i++) {
-            System.out.println(comensals.get(i).getName() + " - esq: " + comensals.get(i).forquillaEsquerra.getId() + " dret: " + comensals.get(i).forquillaDreta.getId());
+            System.out.println(comensals.get(i).getName() + " - esq: " + comensals.get(i).forquillaEsquerra.getId()
+                    + " dret: " + comensals.get(i).forquillaDreta.getId());
         }
     }
 
