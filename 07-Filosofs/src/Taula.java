@@ -21,7 +21,8 @@ public class Taula {
 
   public void showTaula() {
     for (int i = 0; i < comensals.size(); i++) {
-      System.out.println(comensals.get(i).getName() + " - esq: " + comensals.get(i).forquillaEsquerra.getId() + " dret: " + comensals.get(i).forquillaDreta.getId());
+      System.out.println(comensals.get(i).getName() + " - esq: " + comensals.get(i).forquillaEsquerra.getId()
+          + " dret: " + comensals.get(i).forquillaDreta.getId());
     }
   }
 
