@@ -6,6 +6,7 @@ public class Estanc extends Thread {
   List<Tabac> tabacs;
   List<Llumi> llumins;
   List<Paper> papers;
+  public boolean tancat = false;
 
   public Estanc() {
     tabacs = new ArrayList<>();
@@ -25,7 +26,7 @@ public class Estanc extends Thread {
     papers.add(paper);
   }
 
-  public void nouSubministrament() {
+  public synchronized void nouSubministrament() {
     Random random = new Random();
     int choice = random.nextInt(3);
 
@@ -43,43 +44,41 @@ public class Estanc extends Thread {
         System.out.println("Afegint Paper");
         break;
     }
+
+    notifyAll(); // Notifiquem que s'han afegit nous productes
   }
 
-  public Tabac venTabac() {
-    if (tabacs.size() > 0) {
-      Tabac tabac = tabacs.get(0);
-      tabacs.remove(0);
-      return tabac;
+  public synchronized Tabac venTabac() throws InterruptedException {
+    while(tabacs.isEmpty()) {
+      wait();
     }
-    return null;
+    return tabacs.remove(0);
   }
 
-  public Llumi venLlumi() {
-    if (llumins.size() > 0) {
-      Llumi llumi = llumins.get(0);
-      llumins.remove(0);
-      return llumi;
+  public synchronized Llumi venLlumi() throws InterruptedException {
+    while(llumins.isEmpty()) {
+      wait();
     }
-    return null;
+    return llumins.remove(0);
   }
 
-  public Paper venPaper() {
-    if (papers.size() > 0) {
-      Paper paper = papers.get(0);
-      papers.remove(0);
-      return paper;
+  public synchronized Paper venPaper() throws InterruptedException {
+    while(papers.isEmpty()) {
+      wait();
     }
-    return null;
+    return papers.remove(0);
   }
 
   public void tancarEstanc() {
+    tancat = true;
+    notifyAll();
+    this.interrupt();
     System.out.println("Estanc tancat");
-    System.exit(0);
   }
 
   @Override
   public void run() {
-    while(true) {
+    while(!tancat) {
       nouSubministrament();
       try {
         Thread.sleep(500 + new Random().nextInt(501));

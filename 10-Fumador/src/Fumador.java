@@ -1,8 +1,8 @@
 import java.util.Random;
 
 public class Fumador extends Thread {
-  private Estanc estanc;
-  private int id;
+  private final Estanc estanc;
+  private final int id;
   private Tabac tabac = null;
   private Llumi llumi = null;
   private Paper paper = null;
@@ -13,6 +13,30 @@ public class Fumador extends Thread {
     this.id = id;
   }
 
+  public void compraTabac() {
+    try {
+      tabac = estanc.venTabac();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void compraLlumi() {
+    try {
+      llumi = estanc.venLlumi();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void compraPaper() {
+    try {
+      paper = estanc.venPaper();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+
   public void fuma() {
     if (tabac != null && llumi != null && paper != null) {
       tabac = null;
@@ -21,32 +45,30 @@ public class Fumador extends Thread {
       fumades++;
       System.out.println("Fumador " + id + " ha fumat " + fumades + " vegades");
       try {
-        Thread.sleep(500 + new Random().nextInt(501));
+        Thread.sleep(500 + new Random().nextInt(501)); // Temps de fumar
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
     }
   }
 
-  public void compraTabac() {
-    tabac = estanc.venTabac();
-  }
-
-  public void compraLlumi() {
-    llumi = estanc.venLlumi();
-  }
-
-  public void compraPaper() {
-    paper = estanc.venPaper();
-  }
-
   @Override
   public void run() {
-    for (int i = 0; i < 3; i++) {
-      compraTabac();
-      compraLlumi();
-      compraPaper();
-      fuma();      
+    try {
+      while (fumades < 3) {
+        // Compra els materials que li falten
+        if (tabac == null)
+          compraTabac();
+        if (llumi == null)
+          compraLlumi();
+        if (paper == null)
+          compraPaper();
+
+        // Intenta fumar si té tots els materials
+        fuma();
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 }

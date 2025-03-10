@@ -16,7 +16,20 @@ public class Barri {
     }
     barri.estanc.start();
 
-    
+    try {
+      for (Fumador fumador : barri.fumadors) {
+        fumador.join();
+      }
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+
+    try {
+      barri.estanc.tancarEstanc();
+    } catch (Exception e) {
+      System.out.println("Estanc tancat");
+    }
+
   }
 
 }
